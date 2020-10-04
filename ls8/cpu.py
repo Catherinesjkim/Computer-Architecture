@@ -1,3 +1,29 @@
+"""
+LDI Machine code:
+```
+10000010 00000rrr iiiiiiii
+82 0r ii
+```
+
+HTL Machine code:
+```
+00000001 
+01
+```
+
+PRN Machine code:
+```
+01000111 00000rrr
+47 0r
+```
+
+MULT Machine code:
+```
+10100010 00000aaa 00000bbb
+A2 0a 0b
+```
+"""
+
 """CPU functionality."""
 import sys
 
@@ -112,8 +138,9 @@ class CPU:
     def run(self): 
         """Run the CPU."""	       
         # Instruction Register, contains a copy of the currently executing instruction	 
-        # if at 160	        
-        LDI = 130	       
+        # if at 160
+        # binary representations based on the specs
+        LDI = 130
         HLT = 1	        
         PRN = 71	        
         # MULT = 162
