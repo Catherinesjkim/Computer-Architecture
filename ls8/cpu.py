@@ -4,6 +4,7 @@ import sys
 class CPU:
     """Main CPU class."""
 
+    # Day 1: Implement the CPU constructor
     def __init__(self):
         """Construct a new CPU."""
         self.pc = 0
@@ -12,10 +13,12 @@ class CPU:
         self.reg[7] = 0xf4
         self.halted = False	  
 
+    # Add RAM functions ram_read()
     def ram_read(self, address):
         """accept the address to read and return the value stored there"""
         return self.ram[address] 
 
+    # Add RAM functions ram_write()
     def ram_write(self, address, value): 
         """accept a value to write, and the address to write it to"""	      
         self.ram[address] = value
@@ -28,19 +31,30 @@ class CPU:
             print('You must have two arguments') 
             sys.exit(1)	            
         try:
-            with open(sys.argv[1], 'r') as file:
+            with open(sys.argv[1], 'r') as file:  # open 2 files and
+                # read line by line
                 for line in file:
-                    array_split = line.split('#')	                
+                    # Split the current line on the start of the comment '#' symbol
+                    array_split = line.split('#')
+                    # this removes/strips whitespace and \n character
                     nums = array_split[0]	                    
                     try:
-                        num = int(nums, 2)	                        
-                        self.ram[address] = num	                       
+                        # turn any binary code into a number/integer
+                        num = int(nums, 2)	     
+                        # to store into a memory
+                        self.ram[address] = num
+                        # moving the array pointer over
                         address += 1 	                       
                     except:
                         continue 
-        except:
-            print("File not found") 
-            sys.exit(1)	            
+                    
+        # run python3 ls8.py examples/mult.ls8 
+        # otherwise, will get this error message
+        except FileNotFoundError:
+            print(f"{sys.argv[1]} --> *** File Not Found ***")
+            # any number besides 0, it means failed: 2 == FileNotFoundError
+            sys.exit(2)
+
 
     def alu(self, op, reg_a, reg_b): 
         """ALU operations."""	    
@@ -74,7 +88,7 @@ class CPU:
             print(" %02X" % self.reg[i], end='')
         print() 
 
-    # Day 2 - Step 3: Implement the core of CPU's run() method
+    # Day 1 - Implement the core of CPU's run() method
     def run(self): 
         """Run the CPU."""	       
         # Instruction Register, contains a copy of the currently executing instruction	 
@@ -90,7 +104,7 @@ class CPU:
             operand_a = self.ram_read(self.pc + 1)	          
             operand_b = self.ram_read(self.pc + 2)	            
 
-            # Step 5: Add the LDI instruction
+            # Day 1: Add the LDI instruction
             # IR: Instruction Register
             # LDI: Load InDirect - it's used to load a value from a location in memory into a register
             if IR == LDI:
@@ -98,11 +112,15 @@ class CPU:
                 # reg num is going to have operand:a
                 # value is number where we can have the number
                 self.reg[operand_a] = operand_b	                
-                self.pc += 3	                
+                self.pc += 3
+                
+            # Day 1: Implement the HALT instruction handler               
             elif IR == HLT:
                 self.halted = True	                
+                # operating system (1) - exited in a bad way, it failed to do sth. Similar to 500 for a server
                 sys.exit(1)
-            # Step 6: Add the PRN instruction
+                
+            # Day 1: Add the PRINT instruction
             # At this point, I should be able to run the program and have it print 8 to the console!
             elif IR == PRN:
                 print(self.reg[operand_a])	                
