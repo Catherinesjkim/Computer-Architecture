@@ -69,5 +69,6 @@ F
 Project: build a simple data-driven machine. Not a VM but this program, I will model how to allocate memory. Model concepts used in CPUs
 
 
+## Bitwise Operations
 
 

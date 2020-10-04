@@ -1,6 +1,6 @@
 # LS-8 Microcomputer Spec v4.0
 
-## Registers
+## Registers: Storage areas
 
 8 general-purpose 8-bit numeric registers R0-R7.
 
@@ -118,7 +118,7 @@ See `IRET`, below, for returning from an interrupt.
 When the LS-8 is booted, the following steps occur:
 
 * `R0`-`R6` are cleared to `0`.
-* `R7` is set to `0xF4`.
+* `R7` is set to `0xF4` (hexadecimal value).
 * `PC` and `FL` registers are cleared to `0`.
 * RAM is cleared to `0`.
 
@@ -130,7 +130,7 @@ Subsequently, the program can be loaded into RAM starting at address `0x00`.
    executed.
 2. If the instruction does _not_ set the `PC` itself, the `PC` is advanced to
    point to the subsequent instruction.
-3. If the CPU is not halted by a `HLT` instruction, go to step 1.
+3. If the CPU is not halted by a `HLT` instruction, go to step 1. 
 
 Some instructions set the PC directly. These are:
 
@@ -149,6 +149,9 @@ Some instructions set the PC directly. These are:
 In these cases, the `PC` does not automatically advance to the next instruction,
 since it was set explicitly.
 
+
+## Day 2
+
 ## Instruction Layout
 
 Meanings of the bits in the first byte of each instruction: `AABCDDDD`
@@ -158,12 +161,11 @@ Meanings of the bits in the first byte of each instruction: `AABCDDDD`
 * `C` 1 if this instruction sets the PC
 * `DDDD` Instruction identifier
 
-The number of operands `AA` is useful to know because the total number of bytes in any
-instruction is the number of operands + 1 (for the opcode). This
-allows you to know how far to advance the `PC` with each instruction.
+The number of operands `AA` is useful to know because the total number of bytes in any instruction is the number of operands + 1 (for the opcode). This allows you to know how far to advance the `PC` with each instruction.
 
 It might also be useful to check the other bits in an emulator implementation, but
 there are other ways to code it that don't do these checks.
+
 
 ## Instruction Set
 
@@ -189,6 +191,7 @@ Add the value in two registers and store the result in registerA.
 
 Machine code:
 ```
+         operand_a operand_b
 10100000 00000aaa 00000bbb
 A0 0a 0b
 ```
