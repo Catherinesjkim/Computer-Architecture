@@ -3,8 +3,8 @@ import sys
 HLT = 0b00000001
 PRN = 0b01000111
 LDI = 0b10000010
-PUSH = 0b01000101
-POP = 0b01000110
+# PUSH = 0b01000101
+# POP = 0b01000110
 
 # PC
 CALL = 0b01010000
@@ -108,6 +108,7 @@ class CPU:
         self.pc += 3
 
     # Handle CMP with Equal flag
+    # Compare is the same as subtraction except that the result value is not stored - handled by ALU
     def cmp(self, reg_a, reg_b):
         self.alu("CMP", reg_a, reg_b)
         self.pc += 3
@@ -141,15 +142,18 @@ class CPU:
     #     self.pc = self.ram_read(self.sp)
     #     self.sp += 1
 
+    # Jump register. Jump to the address stored in the given register. Set the PC to the address stored in the given register.
     def jmp(self, reg_a, reg_b):
         self.pc = self.reg[reg_a]
 
+    # JEQ register. If equal flag is set(true), jump to the address stored in the given register
     def jeq(self, reg_a, reg_b):
         if self.fl:
             self.jmp(reg_a, reg_b)
         else:
             self.pc += 2
 
+    # JNE register. If E flag is clear (false, 0), jump to the address stored in the given register. Jump if Condition is Met - conditional jump that follows a test - it's commonly found after a CMP instruction
     def jne(self, reg_a, reg_b):
         if not self.fl:
             self.jmp(reg_a, reg_b)
