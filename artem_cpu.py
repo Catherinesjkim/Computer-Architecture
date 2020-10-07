@@ -120,22 +120,27 @@ while running:
         print(memory[-20:])
         print(registers)
     
+    # Stack overflow: out of memory - down to the memory and can't access anymore or overwriting lines of code. All in the RAM. Could break my computer. OS prevents that. Pushing too many things to the stack
+    # Registers don't live in the memory. It lives inside the CPU. Can do things faster. Closer to ALU. ALU also inside the CPU. 
+    # Memory is more persistent and space (256)
     # address = location in memory - context of memory
-    elif instruction == PUSH:
-        # pointer = variable that points an address
+    elif instruction == PUSH: 
+        # pointers = variable that holds an address
+        # push takes a register
         given_register = memory[pc + 1]
         value_in_register = registers[given_register]
         # decrement the Stack Pointer
-        registers[SP] -= 1
-        # write the value of the given register to memory at the SP location
+        registers[SP] -= 1 # where are we at the top of the stack?
+        # write the value of the given register to memory AT the SP location
         memory[registers[SP]] = value_in_register
         pc += 2
     
     # retrieve a number/value --> back to the register
     elif instruction == POP:
+        # pop takes a register
         given_register = memory[pc + 1]
         # Write the value in memory at the top of stack to the given register
-        value_from_memory = memory[registers[SP]]
+        value_from_memory = memory[registers[SP]] # where are we at the top of the stack? - Top of the memory all the way down 
         registers[given_register] = value_from_memory
         # increment the Stack Pointer
         registers[SP] += 1

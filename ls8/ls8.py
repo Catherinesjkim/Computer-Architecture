@@ -10,5 +10,6 @@ cpu = CPU()
 try:
     cpu.load(sys.argv[1])
     cpu.run()
+    
 except IndexError:
-    print("Please provide a directory and a file name.")
+    print("*** Please provide a directory and a filename --> ***") # guard - error mesasge if filename is not provided
