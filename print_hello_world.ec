@@ -1,0 +1,21 @@
+4 # SAVE_REG 
+15 # LOCATION OF PRINT HELLO WORLD ROUTINE
+0 
+4 # SAVE_REG
+18 # LOCATION OF PRINT NUM ROUTINE
+1
+9 # CALL
+0 # Register zero
+9 # CALL
+1 # Register zero
+9 # CALL
+0 # Register zero
+9 # CALL
+1 # Register zero
+2 # HALT
+1 # Print Hello World
+1 # Print Hello World
+10 # RETURN BACK TO WHERE I WAS CALLED FROM
+3 # PRINT_NUM
+12345
+10 # RETURN BACK TO WHERE I WAS CALLED FROM

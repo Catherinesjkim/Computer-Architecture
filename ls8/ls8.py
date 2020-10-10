@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 
-"""Main."""
+"""Main. Initializing the CPU object."""
 
 import sys
 from cpu import *
 
 cpu = CPU()
 
-cpu.load()
-cpu.run()
+try:
+    cpu.load(sys.argv[1])
+    cpu.run()
+    
+except IndexError:
+    print("*** Please provide a directory and a filename --> ***") # guard - error mesasge if filename is not provided

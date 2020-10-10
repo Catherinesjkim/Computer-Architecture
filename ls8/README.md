@@ -59,11 +59,49 @@ but you'll have to implement those three above instructions first!
 
 ## Step 0: IMPORTANT: inventory what is here!
 
-* Make a list of files here.
-* Write a short 3-10-word description of what each file does.
-* Note what has been implemented, and what hasn't.
-* Read this whole file.
-* Skim the spec.
+* Make a list of files here: 
+  1. ls8.py
+  2. cpu.py
+  3. call.ls8
+  4. interrupts.ls8
+  5. keyboard.ls8
+  6. mult.ls8
+  7. print8.ls8
+  8. printstr.ls8
+  9. sctest.ls8
+  10. stack.ls8
+  11. stackoverflow.ls8
+
+* Write a short 3-10-word description of what each file does:
+
+1. ls8.py: imports cpu code from cpu.py and loads and runs the code
+
+2. cpu.py: adds list properties to the CPU class to hold 256 bytes of memory and 8 general-purpose registers
+
+3. call.ls8: calling ls8 computer with some instruction set (LDI, MULT, CALL, HLT, ADD, PRN, & RET)
+
+4. interrupts.ls8: R0, R1, R5 (reserved as the Interrupt Mask - IM) are here. Timer interrupt. This interrupt triggers once per second.
+
+5. keyboard.ls8: Keyboard interrupt. This interrupt triggers when a key is pressed. The value of the key pressed is stored in address 0xF4
+
+6. mult.ls8: Multiply the values in two registers together and store the result in registerA.
+
+7. print8.ls8: prints the number 8
+
+8. printstr.ls8: store this string "Hello, world!" here in the program
+
+9. sctest.ls8: testing file
+
+10. stack.ls8: where the call stack and POP register live
+
+11. stackoverflow.ls8: it's an undesirable condition in which a particular computer program tries to use more memory space than the call stack has available
+
+
+* Note what has been implemented, and what hasn't: Done
+
+* Read this whole file: Done
+
+* Skim the spec: Done
 
 ## Step 1: Add the constructor to `cpu.py`
 
